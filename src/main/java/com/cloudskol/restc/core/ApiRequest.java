@@ -7,4 +7,11 @@ package com.cloudskol.restc.core;
 public class ApiRequest {
     private String path;
 
+    public ApiRequest(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
 }

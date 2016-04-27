@@ -1,9 +1,11 @@
 package com.cloudskol.restc.client;
 
+import com.cloudskol.restc.core.ApiRequest;
 import com.cloudskol.restc.core.ApiResponse;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 
 /**
  * @author tham
@@ -27,7 +29,10 @@ public class RestClient {
         return instance;
     }
 
-    public ApiResponse get() {
+    public ApiResponse get(ApiRequest request) {
+        final ApiRequestBuilder requestBuilder = new ApiRequestBuilder(client);
+        final WebTarget target = requestBuilder.build(request);
+
         return null;
     }
 }
