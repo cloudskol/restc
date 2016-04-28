@@ -1,11 +1,15 @@
 package com.cloudskol.restc.client;
 
 import com.cloudskol.restc.core.ApiRequest;
+import com.cloudskol.restc.core.ApiRequestBuilder;
 import com.cloudskol.restc.core.ApiResponse;
+import com.cloudskol.restc.get.GetApiRequestBuilder;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * @author tham
@@ -30,8 +34,12 @@ public class RestClient {
     }
 
     public ApiResponse get(ApiRequest request) {
-        final ApiRequestBuilder requestBuilder = new ApiRequestBuilder(client);
+        final GetApiRequestBuilder requestBuilder = new GetApiRequestBuilder(client);
         final WebTarget target = requestBuilder.build(request);
+
+        final Response response = target.request().get();
+        System.out.println(response.getStatus());
+        System.out.println(response.readEntity(String.class));
 
         return null;
     }

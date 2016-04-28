@@ -6,12 +6,22 @@ package com.cloudskol.restc.core;
 
 public class ApiRequest {
     private String path;
+    private ApiMethod method;
 
-    public ApiRequest(String path) {
+    ApiRequest(String path) {
+        this(path, ApiMethod.GET);
+    }
+
+    public ApiRequest(String path, ApiMethod method) {
         this.path = path;
+        this.method = method;
     }
 
     public String getPath() {
         return path;
+    }
+
+    public ApiMethod getMethod() {
+        return method;
     }
 }

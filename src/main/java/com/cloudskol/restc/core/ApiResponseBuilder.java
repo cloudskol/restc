@@ -1,4 +1,4 @@
-package com.cloudskol.restc.client;
+package com.cloudskol.restc.core;
 
 import com.cloudskol.restc.core.ApiResponse;
 
