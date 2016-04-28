@@ -18,8 +18,8 @@ public class RestClientTest {
         final GetApiRequest apiRequest = new GetApiRequest(GET_PATH);
         apiRequest.addQueryParam(new Tuple("author", "Tham"));
         final ApiResponse apiResponse = RestClient.getInstance().get(apiRequest);
-        System.out.println("Status: " + apiResponse.getCode());
 
+        System.out.println("Status: " + apiResponse.getCode());
         System.out.println("Data: " + apiResponse.getData());
     }
 }
