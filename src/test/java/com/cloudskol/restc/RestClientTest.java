@@ -11,12 +11,15 @@ import org.junit.Test;
  */
 
 public class RestClientTest {
-    private static final String GET_PATH = "http://localhost:8080/restskol/api/books/1";
+    private static final String GET_PATH = "http://localhost:8080/restskol/api/books";
 
     @Test
     public void testGet() {
         final GetApiRequest apiRequest = new GetApiRequest(GET_PATH);
         apiRequest.addQueryParam(new Tuple("author", "Tham"));
         final ApiResponse apiResponse = RestClient.getInstance().get(apiRequest);
+        System.out.println("Status: " + apiResponse.getCode());
+
+        System.out.println("Data: " + apiResponse.getData());
     }
 }

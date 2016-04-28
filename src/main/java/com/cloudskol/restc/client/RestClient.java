@@ -3,6 +3,7 @@ package com.cloudskol.restc.client;
 import com.cloudskol.restc.core.ApiRequest;
 import com.cloudskol.restc.core.ApiRequestBuilder;
 import com.cloudskol.restc.core.ApiResponse;
+import com.cloudskol.restc.core.ApiResponseBuilder;
 import com.cloudskol.restc.get.GetApiRequestBuilder;
 
 import javax.ws.rs.client.Client;
@@ -37,10 +38,6 @@ public class RestClient {
         final GetApiRequestBuilder requestBuilder = new GetApiRequestBuilder(client);
         final WebTarget target = requestBuilder.build(request);
 
-        final Response response = target.request().get();
-        System.out.println(response.getStatus());
-        System.out.println(response.readEntity(String.class));
-
-        return null;
+        return new ApiResponseBuilder(target.request().get()).build();
     }
 }
