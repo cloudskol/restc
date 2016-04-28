@@ -18,7 +18,7 @@ public class ApiResponseBuilder {
     public ApiResponse build() {
         final ApiResponse apiResponse = new ApiResponse(response.getStatus(),
                 response.readEntity(String.class));
-        
+
         return apiResponse;
     }
 }
