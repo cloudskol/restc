@@ -18,9 +18,28 @@ public class ApiRequestBuilder {
     public WebTarget build(ApiRequest request) {
         WebTarget target = client.target(request.getPath());
 
+        //Add path parameter
         target = addPathParameter(target, request);
 
+        //Add header parameter
+        addHeaderParameter(target, request);
+
         return target;
+    }
+
+    private void addHeaderParameter(WebTarget target, ApiRequest request) {
+        final HeaderParameter headerParam = request.getHeaderParam();
+        if (headerParam == null) {
+            return;
+        }
+
+        final List<Tuple> parameters = headerParam.getParameters();
+        if (parameters == null || parameters.isEmpty()) {
+            return;
+        }
+
+        for (Tuple parameter : parameters) {
+        }
     }
 
     /**

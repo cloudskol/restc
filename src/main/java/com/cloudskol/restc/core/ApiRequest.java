@@ -9,6 +9,7 @@ public class ApiRequest {
     private ApiMethod method;
 
     private PathParameter pathParam;
+    private HeaderParameter headerParam;
 
     public ApiRequest(String path, ApiMethod method) {
         this.path = path;
@@ -29,5 +30,13 @@ public class ApiRequest {
 
     public void setPathParam(PathParameter pathParam) {
         this.pathParam = pathParam;
+    }
+
+    public HeaderParameter getHeaderParam() {
+        return headerParam;
+    }
+
+    public void setHeaderParam(HeaderParameter headerParam) {
+        this.headerParam = headerParam;
     }
 }
