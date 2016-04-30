@@ -1,7 +1,9 @@
 package com.cloudskol.restc;
 
 import com.cloudskol.restc.client.RestClient;
+import com.cloudskol.restc.core.ApiRequest;
 import com.cloudskol.restc.core.ApiResponse;
+import com.cloudskol.restc.core.PathParameter;
 import com.cloudskol.restc.core.Tuple;
 import com.cloudskol.restc.get.GetApiRequest;
 import org.junit.Test;
@@ -11,15 +13,32 @@ import org.junit.Test;
  */
 
 public class RestClientTest {
-    private static final String GET_PATH = "http://localhost:8080/restskol/api/books";
+    private static final String BOOKS = "http://localhost:8080/restskol/api/books";
+    private static final String BOOK_WITH_ID = "http://localhost:8080/restskol/api/books/{id}";
 
     @Test
     public void testGet() {
-        final GetApiRequest apiRequest = new GetApiRequest(GET_PATH);
+        final GetApiRequest apiRequest = new GetApiRequest(BOOKS);
         apiRequest.addQueryParam(new Tuple("author", "Tham"));
         final ApiResponse apiResponse = RestClient.getInstance().get(apiRequest);
 
-        System.out.println("Status: " + apiResponse.getCode());
-        System.out.println("Data: " + apiResponse.getData());
+        displayResponse(apiResponse);
+    }
+
+    @Test
+    public void testPathParameter() {
+        final GetApiRequest apiRequest = new GetApiRequest(BOOK_WITH_ID);
+
+        final PathParameter pathParameter = new PathParameter();
+        pathParameter.addParameter(new Tuple("id", "3"));
+        apiRequest.setPathParam(pathParameter);
+
+        final ApiResponse apiResponse = RestClient.getInstance().get(apiRequest);
+        displayResponse(apiResponse);
+    }
+
+    private void displayResponse(ApiResponse response) {
+        System.out.println("Status: " + response.getCode());
+        System.out.println("Data: " + response.getData());
     }
 }

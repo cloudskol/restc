@@ -1,9 +1,8 @@
 package com.cloudskol.restc.core;
 
-import com.cloudskol.restc.core.ApiRequest;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
+import java.util.List;
 
 /**
  * @author tham
@@ -17,7 +16,34 @@ public class ApiRequestBuilder {
     }
 
     public WebTarget build(ApiRequest request) {
-        final WebTarget target = client.target(request.getPath());
+        WebTarget target = client.target(request.getPath());
+
+        target = addPathParameter(target, request);
+
+        return target;
+    }
+
+    /**
+     * Resolves the path parameter available in the request object
+     *
+     * @param target
+     * @param request
+     * @return instance of @WebTarget after resolved the path parameters
+     */
+    private WebTarget addPathParameter(WebTarget target, ApiRequest request) {
+        final PathParameter pathParam = request.getPathParam();
+        if (pathParam == null) {
+            return target;
+        }
+
+        final List<Tuple> parameters = pathParam.getParameters();
+        if (parameters == null || parameters.isEmpty()) {
+            return target;
+        }
+
+        for (Tuple parameter : parameters) {
+            target = target.resolveTemplate(parameter.getKey(), parameter.getValue());
+        }
 
         return target;
     }
