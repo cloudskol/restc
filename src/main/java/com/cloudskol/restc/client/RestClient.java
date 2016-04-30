@@ -8,6 +8,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.List;
 
@@ -50,17 +51,11 @@ public class RestClient {
         final GetApiRequestBuilder requestBuilder = new GetApiRequestBuilder(client);
         final WebTarget target = requestBuilder.build(request);
 
-        final Invocation.Builder invocationBuilder = target.request();
-        final MultivaluedMap<String, Object> headerParams = convertHeaderParams(request);
-        if (headerParams != null && headerParams.size() > 0) {
-            invocationBuilder.headers(headerParams);
-        }
-
-
+        Invocation.Builder invocationBuilder = addHeaderParams(target.request(), request);
         return new ApiResponseBuilder(invocationBuilder.get()).build();
     }
 
-    private MultivaluedMap<String, Object> convertHeaderParams(ApiRequest request) {
+    private Invocation.Builder addHeaderParams(Invocation.Builder invocationBuilder, ApiRequest request) {
         final HeaderParameter headerParam = request.getHeaderParam();
         if (headerParam == null) {
             return null;
@@ -72,11 +67,10 @@ public class RestClient {
         }
 
 
-        final Form form = new Form();
         for (Tuple header : parameters) {
-            form.param(header.getKey(), header.getValue());
+            invocationBuilder = invocationBuilder.header(header.getKey(), header.getValue());
         }
 
-        return form.asMap();
+        return invocationBuilder;
     }
 }
