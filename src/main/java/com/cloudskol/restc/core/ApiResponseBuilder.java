@@ -1,7 +1,5 @@
 package com.cloudskol.restc.core;
 
-import com.cloudskol.restc.core.ApiResponse;
-
 import javax.ws.rs.core.Response;
 
 /**

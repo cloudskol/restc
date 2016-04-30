@@ -2,6 +2,9 @@ package com.cloudskol.restc.core;
 
 /**
  * @author tham
+ *
+ * Simple key-value pair
+ * This is used in many different forms like header, path, query parameters
  */
 
 public class Tuple {
