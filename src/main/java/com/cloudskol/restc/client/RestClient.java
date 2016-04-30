@@ -1,16 +1,15 @@
 package com.cloudskol.restc.client;
 
-import com.cloudskol.restc.core.ApiRequest;
-import com.cloudskol.restc.core.ApiRequestBuilder;
-import com.cloudskol.restc.core.ApiResponse;
-import com.cloudskol.restc.core.ApiResponseBuilder;
+import com.cloudskol.restc.core.*;
 import com.cloudskol.restc.get.GetApiRequestBuilder;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MultivaluedMap;
+import java.util.List;
 
 /**
  * @author tham
@@ -36,10 +35,48 @@ public class RestClient {
         return instance;
     }
 
+    public ApiResponse request(ApiRequest request, ApiMethod method) {
+        ApiResponse response = null;
+        switch (method) {
+            case GET:
+                response = get(request);
+                break;
+        }
+
+        return response;
+    }
+
     public ApiResponse get(ApiRequest request) {
         final GetApiRequestBuilder requestBuilder = new GetApiRequestBuilder(client);
         final WebTarget target = requestBuilder.build(request);
 
-        return new ApiResponseBuilder(target.request().get()).build();
+        final Invocation.Builder invocationBuilder = target.request();
+        final MultivaluedMap<String, Object> headerParams = convertHeaderParams(request);
+        if (headerParams != null && headerParams.size() > 0) {
+            invocationBuilder.headers(headerParams);
+        }
+
+
+        return new ApiResponseBuilder(invocationBuilder.get()).build();
+    }
+
+    private MultivaluedMap<String, Object> convertHeaderParams(ApiRequest request) {
+        final HeaderParameter headerParam = request.getHeaderParam();
+        if (headerParam == null) {
+            return null;
+        }
+
+        final List<Tuple> parameters = headerParam.getParameters();
+        if (parameters == null || parameters.isEmpty()) {
+            return null;
+        }
+
+
+        final Form form = new Form();
+        for (Tuple header : parameters) {
+            form.param(header.getKey(), header.getValue());
+        }
+
+        return form.asMap();
     }
 }
