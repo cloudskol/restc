@@ -14,6 +14,8 @@ import javax.ws.rs.core.Response;
 
 /**
  * @author tham
+ *
+ * Main entry point for Rest client
  */
 
 public class RestClient {
