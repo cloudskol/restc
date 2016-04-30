@@ -64,6 +64,7 @@ public class RestClient {
         }
 
 
+        //Updated invocation builder should be returned back
         for (Tuple header : parameters) {
             invocationBuilder = invocationBuilder.header(header.getKey(), header.getValue());
         }
