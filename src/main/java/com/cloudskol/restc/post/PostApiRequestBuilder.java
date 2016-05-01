@@ -5,6 +5,8 @@ import com.cloudskol.restc.core.ApiRequestBuilder;
 import com.cloudskol.restc.core.Tuple;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Form;
 import java.util.List;
@@ -26,7 +28,7 @@ public class PostApiRequestBuilder {
         return webTarget;
     }
 
-    public Form getFormParameter(ApiRequest request) {
+    public Invocation getInvocationwithForm(Invocation.Builder invokeBuilder, ApiRequest request) {
         if (!(request instanceof PostApiRequest)) {
             return null;
         }
@@ -47,6 +49,6 @@ public class PostApiRequestBuilder {
             form.param(formParameter.getKey(), formParameter.getValue());
         }
 
-        return form;
+        return invokeBuilder.buildPost(Entity.entity(form, formParam.getType()));
     }
 }

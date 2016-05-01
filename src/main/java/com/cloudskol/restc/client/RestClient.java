@@ -77,14 +77,7 @@ public class RestClient {
         final WebTarget target = requestBuilder.build(request);
 
         Invocation.Builder invocationBuilder = addHeaderParams(target.request(), request);
-        final Form formParameter = requestBuilder.getFormParameter(request);
-        Invocation invocation;
-        if (formParameter != null) {
-            invocation = invocationBuilder.buildPost(Entity.entity(formParameter,
-                    MediaType.APPLICATION_FORM_URLENCODED_TYPE));
-        } else {
-            invocation = invocationBuilder.buildPost(null);
-        }
+        final Invocation invocation = requestBuilder.getInvocationwithForm(invocationBuilder, request);
 
         return new ApiResponseBuilder(invocation.invoke()).build();
     }
