@@ -1,10 +1,7 @@
 package com.cloudskol.restc;
 
 import com.cloudskol.restc.client.RestClient;
-import com.cloudskol.restc.core.ApiRequest;
-import com.cloudskol.restc.core.ApiResponse;
-import com.cloudskol.restc.core.PathParameter;
-import com.cloudskol.restc.core.Tuple;
+import com.cloudskol.restc.core.*;
 import com.cloudskol.restc.get.GetApiRequest;
 import org.junit.Test;
 
@@ -19,9 +16,12 @@ public class RestClientTest {
     @Test
     public void testGet() {
         final GetApiRequest apiRequest = new GetApiRequest(BOOKS);
-        apiRequest.addQueryParam(new Tuple("author", "Tham"));
-        final ApiResponse apiResponse = RestClient.getInstance().get(apiRequest);
+        
+        final QueryParameter queryParameter = new QueryParameter();
+        queryParameter.addParameter(new Tuple("author", "Tham"));
+        apiRequest.setQueryParam(queryParameter);
 
+        final ApiResponse apiResponse = RestClient.getInstance().get(apiRequest);
         displayResponse(apiResponse);
     }
 

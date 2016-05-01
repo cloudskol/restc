@@ -8,6 +8,7 @@ public class ApiRequest {
     private String path;
     private ApiMethod method;
 
+    private QueryParameter queryParam;
     private PathParameter pathParam;
     private HeaderParameter headerParam;
 
@@ -22,6 +23,14 @@ public class ApiRequest {
 
     public ApiMethod getMethod() {
         return method;
+    }
+
+    public QueryParameter getQueryParam() {
+        return queryParam;
+    }
+
+    public void setQueryParam(QueryParameter queryParam) {
+        this.queryParam = queryParam;
     }
 
     public PathParameter getPathParam() {

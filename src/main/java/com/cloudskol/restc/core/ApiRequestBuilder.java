@@ -1,5 +1,7 @@
 package com.cloudskol.restc.core;
 
+import com.cloudskol.restc.get.GetApiRequest;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import java.util.List;
@@ -17,6 +19,9 @@ public class ApiRequestBuilder {
 
     public WebTarget build(ApiRequest request) {
         WebTarget target = client.target(request.getPath());
+
+        //Add query parameter
+        target = addQueryParameter(target, request);
 
         //Add path parameter
         target = addPathParameter(target, request);
@@ -44,6 +49,24 @@ public class ApiRequestBuilder {
 
         for (Tuple parameter : parameters) {
             target = target.resolveTemplate(parameter.getKey(), parameter.getValue());
+        }
+
+        return target;
+    }
+
+    private WebTarget addQueryParameter(WebTarget target, ApiRequest request) {
+        final QueryParameter queryParam = request.getQueryParam();
+        if (queryParam == null) {
+            return target;
+        }
+
+        final List<Tuple> queryParameters = queryParam.getParameters();
+        if (queryParameters == null || queryParameters.isEmpty()) {
+            return target;
+        }
+
+        for (Tuple queryParameter : queryParameters) {
+            target = target.queryParam(queryParameter.getKey(), queryParameter.getValue());
         }
 
         return target;

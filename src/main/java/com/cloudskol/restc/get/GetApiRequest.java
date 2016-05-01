@@ -12,17 +12,7 @@ import java.util.List;
  */
 
 public class GetApiRequest extends ApiRequest {
-    private List<Tuple> queryParams = new ArrayList<Tuple>(2);
-
     public GetApiRequest(String path) {
         super(path, ApiMethod.GET);
-    }
-
-    public boolean addQueryParam(Tuple tuple) {
-        return queryParams.add(tuple);
-    }
-
-    public List<Tuple> getQueryParams() {
-        return queryParams;
     }
 }

@@ -20,28 +20,7 @@ public class GetApiRequestBuilder {
 
     public WebTarget build(ApiRequest request) {
         WebTarget webTarget = requestBuilder.build(request);
-
-        //Add query parameter
-        webTarget = addQueryParams(webTarget, request);
-
         System.out.println("Request: " + webTarget.getUri().toString());
-        return webTarget;
-    }
-
-    private WebTarget addQueryParams(WebTarget webTarget, ApiRequest request) {
-        if (!(request instanceof GetApiRequest)) {
-            return webTarget;
-        }
-
-        GetApiRequest getApiRequest = (GetApiRequest)request;
-        if (getApiRequest.getQueryParams() == null || getApiRequest.getQueryParams().isEmpty()) {
-            return webTarget;
-        }
-
-        for (Tuple tuple : getApiRequest.getQueryParams()) {
-            webTarget = webTarget.queryParam(tuple.getKey(), tuple.getValue());
-        }
-
         return webTarget;
     }
 }
