@@ -18,11 +18,11 @@ package com.cloudskol.restc.client;
 
 import com.cloudskol.restc.core.*;
 import com.cloudskol.restc.get.GetApiRequestBuilder;
+import com.cloudskol.restc.post.PostApiRequestBuilder;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.*;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
@@ -55,6 +55,10 @@ public class RestClient {
             case GET:
                 response = get(request);
                 break;
+
+            case POST:
+                response = post(request);
+                break;
         }
 
         return response;
@@ -66,6 +70,23 @@ public class RestClient {
 
         Invocation.Builder invocationBuilder = addHeaderParams(target.request(), request);
         return new ApiResponseBuilder(invocationBuilder.get()).build();
+    }
+
+    public ApiResponse post(ApiRequest request) {
+        final PostApiRequestBuilder requestBuilder = new PostApiRequestBuilder(client);
+        final WebTarget target = requestBuilder.build(request);
+
+        Invocation.Builder invocationBuilder = addHeaderParams(target.request(), request);
+        final Form formParameter = requestBuilder.getFormParameter(request);
+        Invocation invocation;
+        if (formParameter != null) {
+            invocation = invocationBuilder.buildPost(Entity.entity(formParameter,
+                    MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+        } else {
+            invocation = invocationBuilder.buildPost(null);
+        }
+
+        return new ApiResponseBuilder(invocation.invoke()).build();
     }
 
     private Invocation.Builder addHeaderParams(Invocation.Builder invocationBuilder, ApiRequest request) {

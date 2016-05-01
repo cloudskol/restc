@@ -2,7 +2,6 @@ package com.cloudskol.restc.get;
 
 import com.cloudskol.restc.core.ApiRequest;
 import com.cloudskol.restc.core.ApiRequestBuilder;
-import com.cloudskol.restc.core.Tuple;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;

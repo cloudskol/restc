@@ -8,7 +8,13 @@ import com.cloudskol.restc.core.ApiRequest;
  */
 
 public class PostApiRequest extends ApiRequest {
+    private FormParameter formParam;
+
     public PostApiRequest(String path) {
         super(path, ApiMethod.POST);
+    }
+
+    public FormParameter getFormParam() {
+        return formParam;
     }
 }
