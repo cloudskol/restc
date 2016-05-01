@@ -16,7 +16,7 @@ public class RestClientTest {
     @Test
     public void testGet() {
         final GetApiRequest apiRequest = new GetApiRequest(BOOKS);
-        
+
         final QueryParameter queryParameter = new QueryParameter();
         queryParameter.addParameter(new Tuple("author", "Tham"));
         apiRequest.setQueryParam(queryParameter);
