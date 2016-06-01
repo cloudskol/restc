@@ -8,6 +8,8 @@ import javax.ws.rs.client.WebTarget;
 
 /**
  * @author tham
+ *
+ * Builder to handle the GET method call
  */
 
 public class GetApiRequestBuilder {

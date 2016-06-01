@@ -5,6 +5,8 @@ import com.cloudskol.restc.core.ApiRequest;
 
 /**
  * @author tham
+ *
+ * Model object which will be used for POST request
  */
 
 public class PostApiRequest extends ApiRequest {

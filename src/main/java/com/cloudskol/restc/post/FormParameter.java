@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * @author tham
+ *
+ * Wrapper to handle the form parameters in the request
  */
 
 public class FormParameter {
