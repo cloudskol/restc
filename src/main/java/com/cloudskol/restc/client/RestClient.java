@@ -21,8 +21,6 @@ import com.cloudskol.restc.get.GetApiRequestBuilder;
 import com.cloudskol.restc.post.PostApiRequestBuilder;
 
 import javax.ws.rs.client.*;
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
