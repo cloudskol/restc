@@ -47,6 +47,13 @@ public class RestClient {
         return instance;
     }
 
+    /**
+     * Base method to call the REST API
+     *
+     * @param request
+     * @param method
+     * @return response constrcuted with {@link ApiResponse}
+     */
     public ApiResponse request(ApiRequest request, ApiMethod method) {
         ApiResponse response = null;
         switch (method) {
