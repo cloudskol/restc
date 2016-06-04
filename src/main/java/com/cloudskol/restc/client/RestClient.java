@@ -69,6 +69,12 @@ public class RestClient {
         return response;
     }
 
+    /**
+     * Implementation for GET method
+     *
+     * @param request
+     * @return instance of {@link ApiResponse} with status code and response payload
+     */
     public ApiResponse get(ApiRequest request) {
         final GetApiRequestBuilder requestBuilder = new GetApiRequestBuilder(client);
         final WebTarget target = requestBuilder.build(request);
