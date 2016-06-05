@@ -83,6 +83,12 @@ public class RestClient {
         return new ApiResponseBuilder(invocationBuilder.get()).build();
     }
 
+    /**
+     * Method for calling POST API
+     *
+     * @param request
+     * @return instance of {@link ApiResponse} with status code and response payload
+     */
     public ApiResponse post(ApiRequest request) {
         final PostApiRequestBuilder requestBuilder = new PostApiRequestBuilder(client);
         final WebTarget target = requestBuilder.build(request);
