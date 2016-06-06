@@ -99,6 +99,13 @@ public class RestClient {
         return new ApiResponseBuilder(invocation.invoke()).build();
     }
 
+    /**
+     * This will add the respective header parameter to the request object
+     *
+     * @param invocationBuilder
+     * @param request
+     * @return invovation builder with header parameters filled
+     */
     private Invocation.Builder addHeaderParams(Invocation.Builder invocationBuilder, ApiRequest request) {
         final HeaderParameter headerParam = request.getHeaderParam();
         if (headerParam == null) {
