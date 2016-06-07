@@ -30,6 +30,12 @@ public class PostApiRequestBuilder {
         return webTarget;
     }
 
+    /**
+     * Inserts the form parameter into the POST request
+     * @param invokeBuilder
+     * @param request
+     * @return
+     */
     public Invocation getInvocationwithForm(Invocation.Builder invokeBuilder, ApiRequest request) {
         if (!(request instanceof PostApiRequest)) {
             return null;
