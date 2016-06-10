@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * @author tham
+ *
+ * Bean object for holding GET api related information
  */
 
 public class GetApiRequest extends ApiRequest {
