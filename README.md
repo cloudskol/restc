@@ -9,6 +9,7 @@ REST client with performance monitoring
     * Form
   * PUT <TODO>
   * DELETE <TODO>
+  * PATCH <TODO>
 
 ## How to run:
 
